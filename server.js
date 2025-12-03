@@ -23,12 +23,22 @@ const path = require("path");
 const mongoose = require("mongoose");
 const app = express();
 app.use(express.json());  
+const prodUrls = [
+  "https://lovable.dev",
+  "https://id-preview--f23c2695-2b3f-4a72-8906-1abb7a82913e.lovable.app",
+];
+
 app.use(
   cors({
-    origin: [process.env.DEV_URL, process.env.PRODUCTION_URL, 'null'],
+    origin: [
+      process.env.DEV_URL,
+      ...prodUrls,
+      "null",
+    ],
     credentials: true,
   })
 );
+
 // 1. Import your db-interaction module
 const dbInteraction = require("./node_modules/@blaze-case-ai/blaze-engine/server/database/db-interaction");
 
